@@ -1,0 +1,25 @@
+/*.divider:after,
+.divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: #daebfa;
+}
+.comptop{
+position: relative;
+top: 30px !important;
+}
+
+.imglogtam{
+    width:100%;
+height: 65vh;
+}
+
+.h-custom {
+height: calc(100% - 73px);
+}
+@media (max-width: 450px) {
+.h-custom {
+height: 100%;
+}
+}*/

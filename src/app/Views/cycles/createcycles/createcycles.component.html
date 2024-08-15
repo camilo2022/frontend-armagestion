@@ -1,0 +1,82 @@
+<div class="col-md-6 offset-md-3">
+  <h3 class="text-center">Registro de Ciclos</h3>
+  <form (ngSubmit)="onSubmit()" #cyclesForm="ngForm">
+
+    <div class="form-group">
+      <mat-form-field class="example-full-width">
+        <mat-label>Nombre del Ciclo</mat-label>
+        <input
+        matInput
+        class="mb-2"
+        id="cycle_name"
+        [(ngModel)]="cycle.cycle_name"
+        name="cycle_name"
+        required
+        placeholder="Digite nombre del ciclo"
+        #cycle_name="ngModel">
+      </mat-form-field>
+      <div class="alert alert-danger" *ngIf="cycle_name.invalid && (cycle_name.dirty || cycle_name.touched)">
+        <div *ngIf="cycle_name.errors?.['required']">
+          El nombre del ciclo es requerido
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field class="example-full-width">
+        <mat-label>Fecha Inicio del Ciclo</mat-label>
+        <input
+          matInput
+          [matDatepicker]="cycleStartDatePicker"
+          class="mb-2"
+          id="cycle_start_date"
+          [(ngModel)]="cycle.cycle_start_date"
+          name="cycle_start_date"
+          required
+          placeholder="Ingresa la fecha de inicio del ciclo"
+          #cycle_start_date="ngModel"
+        />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="cycleStartDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #cycleStartDatePicker></mat-datepicker>
+      </mat-form-field>
+      <div class="alert alert-danger" *ngIf="cycle_start_date.invalid && (cycle_start_date.dirty || cycle_start_date.touched) || cycle.cycle_start_date >= cycle.cycle_end_date">
+        <div *ngIf="cycle_start_date.errors?.['required']">
+          La fecha de inicio es requerida
+        </div>
+        <div *ngIf="cycle.cycle_start_date >= cycle.cycle_end_date">
+          La fecha de inicio debe ser anterior o igual a la fecha final
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field class="example-full-width">
+        <mat-label>Fecha Fin del Ciclo</mat-label>
+        <input
+          matInput
+          [matDatepicker]="cycleEndtDatePicker"
+          class="mb-2"
+          id="cycle_end_date"
+          [(ngModel)]="cycle.cycle_end_date"
+          name="cycle_end_date"
+          required
+          placeholder="Ingresa la fecha de fin del ciclo"
+          #cycle_end_date="ngModel"
+        />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="cycleEndtDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #cycleEndtDatePicker></mat-datepicker>
+      </mat-form-field>
+      <div class="alert alert-danger" *ngIf="cycle_end_date.invalid && (cycle_end_date.dirty || cycle_end_date.touched)">
+        <div *ngIf="cycle_end_date.errors?.['required']">
+          La fecha de inicio es requerida
+        </div>
+      </div>
+    </div>
+
+
+    <button type="button" class="btn btn-secondary m-1" (click)="indexCycles()">Devolver</button>
+    <button type="submit" class="btn btn-success m-1" [disabled]="!cyclesForm.form['valid']">Guardar</button>
+  </form>
+</div>

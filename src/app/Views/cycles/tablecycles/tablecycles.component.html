@@ -1,0 +1,76 @@
+<div class="col-md-12">
+  <h1>Gestionar Ciclos</h1>
+  <!-- <a class="btn btn-info mb-3" routerLink="Create" routerLinkActive="active">Crear Ciclo</a> -->
+
+  <div class="mat-elevation-z8">
+    <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="searchCycles()" placeholder="Ex. ium" #input [(ngModel)]="dataTable.search">
+    </mat-form-field>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> Id </th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="cycle_name">
+          <th mat-header-cell *matHeaderCellDef> Nombre </th>
+          <td mat-cell *matCellDef="let element"> {{element.cycle_name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="cycle_start_date">
+          <th mat-header-cell *matHeaderCellDef> Fecha Inicio </th>
+          <td mat-cell *matCellDef="let element"> {{element.cycle_start_date}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="cycle_end_date">
+          <th mat-header-cell *matHeaderCellDef> Fecha Fin </th>
+          <td mat-cell *matCellDef="let element"> {{element.cycle_end_date}} </td>
+        </ng-container>
+
+        <!-- <ng-container matColumnDef="editar">
+          <th mat-header-cell *matHeaderCellDef> Editar </th>
+          <td mat-cell *matCellDef="let element">
+            <div class="example-button-container">
+              <button mat-mini-fab class="bg-primary" (click)="editCycle(element.id, element)">
+                <mat-icon>edit</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="eliminar">
+          <th mat-header-cell *matHeaderCellDef> Eliminar </th>
+          <td mat-cell *matCellDef="let element">
+            <div class="example-button-container">
+              <button mat-mini-fab class="bg-danger" (click)="deleteCycle(element)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container> -->
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <ng-container class="mat-row" *matNoDataRow>
+          <tr >
+            <td class="mat-cell no-data-cell" colspan="6">NO HAY REGISTROS SOBRE "{{input.value}}"</td>
+          </tr>
+        </ng-container>
+    </table>
+
+    <mat-paginator
+      [pageSize]="dataTable.perPage"
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      [length]="dataTable.total"
+      [pageSize]="dataTable.per_page"
+      (page)="onPageChange($event)"
+      showFirstLastButtons
+    ></mat-paginator>
+  </div>
+</div>
+

@@ -1,0 +1,1073 @@
+<form (ngSubmit)="onSubmit()" #campaignsForm="ngForm">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <div class="col-lg-12">
+        <h3 class="text-center">Actualizacion de Configuracion de Campañas</h3>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <mat-form-field class="example-full-width">
+                <mat-label>Cantidad minima interacciones </mat-label>
+                <input
+                matInput
+                type="number"
+                id="user_interactions_min_count"
+                [(ngModel)]="configurationCampaign.user_interactions_min_count"
+                name="user_interactions_min_count"
+                required
+                placeholder="Digite el minimo de registros por Usuario"
+                #user_interactions_min_count="ngModel">
+              </mat-form-field>
+              <div class="alert alert-danger" *ngIf="user_interactions_min_count.invalid && (user_interactions_min_count.dirty || user_interactions_min_count.touched) || (configurationCampaign.user_interactions_min_count >= configurationCampaign.user_interactions_max_count && (configurationCampaign.user_interactions_min_count != null || configurationCampaign.user_interactions_max_count != null))">
+                <div *ngIf="user_interactions_min_count.errors?.['required']">
+                  La cantidad minima de interacciones por usuario es requerida.
+                </div>
+                <div *ngIf="configurationCampaign.user_interactions_min_count >= configurationCampaign.user_interactions_max_count">
+                  La cantidad minima de interacciones por usuario debe ser menor a la cantidad maxima.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <mat-form-field class="example-full-width">
+                <mat-label>Cantidad maxima interacciones </mat-label>
+                <input
+                matInput
+                type="number"
+                id="user_interactions_max_count"
+                [(ngModel)]="configurationCampaign.user_interactions_max_count"
+                name="user_interactions_max_count"
+                required
+                placeholder="Digite el maximo de registros por Usuario"
+                #user_interactions_max_count="ngModel">
+              </mat-form-field>
+              <div class="alert alert-danger" *ngIf="user_interactions_min_count.invalid && (user_interactions_min_count.dirty || user_interactions_min_count.touched) || (configurationCampaign.user_interactions_min_count >= configurationCampaign.user_interactions_max_count && (configurationCampaign.user_interactions_min_count != null || configurationCampaign.user_interactions_max_count != null))">
+                <div *ngIf="user_interactions_max_count.errors?.['required']">
+                  La cantidad maxima de interacciones por usuario es requerida.
+                </div>
+                <div *ngIf="user_interactions_min_count >= user_interactions_max_count">
+                  La cantidad maxima de interacciones por usuario debe ser mayor a la cantidad minima.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <mat-form-field class="example-full-width">
+                <mat-label>Porcentaje de efectividad </mat-label>
+                <input
+                matInput
+                type="number"
+                id="effectiveness_percentage"
+                [(ngModel)]="configurationCampaign.effectiveness_percentage"
+                name="effectiveness_percentage"
+                min="1"
+                max="100"
+                required
+                placeholder="Digite el Porcentaje de efectividad esperado"
+                #effectiveness_percentage="ngModel">
+              </mat-form-field>
+              <div class="alert alert-danger" *ngIf="effectiveness_percentage.invalid && (effectiveness_percentage.dirty || effectiveness_percentage.touched)">
+                <div *ngIf="effectiveness_percentage.errors?.['required']">
+                  El porcentaje de efectividad esperado es requrido.
+                </div>
+                <div *ngIf="effectiveness_percentage.errors?.['min']">
+                  El valor minimo porcentaje de efectividad esperado 1.
+                </div>
+                <div *ngIf="effectiveness_percentage.errors?.['max']">
+                  El valor minimo porcentaje de efectividad esperado 100.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <mat-form-field class="example-full-width">
+                <mat-label>Porcentaje acuerdos de pago </mat-label>
+                <input
+                matInput
+                type="number"
+                id="payment_agreement_percentage"
+                [(ngModel)]="configurationCampaign.payment_agreement_percentage"
+                name="payment_agreement_percentage"
+                min="1"
+                max="100"
+                required
+                placeholder="Digite el Porcentaje acuerdos de pago esperado"
+                #payment_agreement_percentage="ngModel">
+              </mat-form-field>
+              <div class="alert alert-danger" *ngIf="payment_agreement_percentage.invalid && (payment_agreement_percentage.dirty || payment_agreement_percentage.touched)">
+                <div *ngIf="payment_agreement_percentage.errors?.['required']">
+                  El porcentaje acuerdos de pago esperado es requrido.
+                </div>
+                <div *ngIf="effectiveness_percentage.errors?.['min']">
+                  El valor minimo porcentaje de acuerdos de pago esperado 1.
+                </div>
+                <div *ngIf="effectiveness_percentage.errors?.['max']">
+                  El valor minimo porcentaje de acuerdos de pago esperado 100.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <mat-form-field class="example-full-width">
+                <mat-label>Porcentaje acuerdos de pago veridicos * </mat-label>
+                <input
+                matInput
+                type="number"
+                id="payment_agreement_true_percentage"
+                [(ngModel)]="configurationCampaign.payment_agreement_true_percentage"
+                name="payment_agreement_true_percentage"
+                min="1"
+                max="100"
+                placeholder="Digite el Porcentaje acuerdos de tipos de servicio"
+                #payment_agreement_true_percentage="ngModel">
+              </mat-form-field>
+              <div class="alert alert-danger" *ngIf="payment_agreement_true_percentage.invalid && (payment_agreement_true_percentage.dirty || payment_agreement_true_percentage.touched)">
+                <div *ngIf="payment_agreement_true_percentage.errors?.['required']">
+                  El porcentaje acuerdos de pago veridico esperado es requrido.
+                </div>
+                <div *ngIf="payment_agreement_true_percentage.errors?.['min']">
+                  El valor minimo porcentaje de acuerdos de pago veridico esperado 1.
+                </div>
+                <div *ngIf="payment_agreement_true_percentage.errors?.['max']">
+                  El valor minimo porcentaje de acuerdos de pago veridico esperado 100.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <mat-form-field class="example-full-width">
+                <mat-label>Porcentaje tipo de servicio </mat-label>
+                <input
+                matInput
+                type="number"
+                id="type_service_percentage"
+                [(ngModel)]="configurationCampaign.type_service_percentage"
+                name="type_service_percentage"
+                min="1"
+                max="100"
+                placeholder="Digite el Porcentaje acuerdos de tipos de servicio"
+                #type_service_percentage="ngModel">
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="form-group">
+
+              <mat-accordion>
+                <mat-expansion-panel hideToggle>
+
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Configurar horarios
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+
+                  <h4 class="custom-nav-link" style="font-size: 14px;">Tipos de Horario</h4>
+
+                  <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link active custom-nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Pago no acordado</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link custom-nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Pago acordado</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link custom-nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Pago de acuerdo adicional</a>
+                    </li>
+                  </ul>
+                  <div class="tab-content" id="myTabContent">
+
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+                        <table mat-table [dataSource]="dataSourcePatternTime" class="table table-responsive tablePattern">
+                          <!-- Primera fila -->
+                          <ng-container matColumnDef="id_function">
+                            <td mat-cell *matCellDef="let element" class="d-none">
+                             {{element.id_function}}
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="id_configurations">
+                            <td mat-cell *matCellDef="let element" class="d-none">
+                              {{element.id_configurations}}
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="objects_8_in_10">
+                            <td mat-cell *matCellDef="let element">
+                              <button mat-raised-button color="primary" type="button" (click)="openDialog('objects_8_in_10', element)" class="mat-typography text-small full-width-button">
+                                08:00 a 10:00
+                              </button>
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="objects_08_in_13">
+                            <td mat-cell *matCellDef="let element">
+                              <button mat-raised-button color="primary" type="button" (click)="openDialog('objects_08_in_13', element)" class="mat-typography text-small full-width-button">
+                                08:00 a 13:00
+                              </button>
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="objects_08_in_14">
+                            <td mat-cell *matCellDef="let element">
+                              <button mat-raised-button color="primary" type="button" (click)="openDialog('objects_08_in_14', element)" class="mat-typography text-small full-width-button">
+                                08:00 a 14:00
+                              </button>
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="objects_11_in_13">
+                            <td mat-cell *matCellDef="let element">
+                              <button mat-raised-button color="primary" type="button" (click)="openDialog('objects_11_in_13', element)" class="mat-typography text-small full-width-button">
+                                11:00 a 13:00
+                              </button>
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="objects_12_in_13">
+                            <td mat-cell *matCellDef="let element">
+                              <button mat-raised-button color="primary" type="button" (click)="openDialog('objects_12_in_13', element)" class="mat-typography text-small full-width-button">
+                                12:00 a 13:00
+                              </button>
+                            </td>
+                          </ng-container>
+
+                          <tr mat-row *matRowDef="let row; columns: displayedColumnsPatternTime.slice(0, 7);"></tr>
+                        </table>
+
+                        <table mat-table [dataSource]="dataSourcePatternTime" class="table table-responsive tablePattern">
+                          <!-- Segunda fila -->
+
+                          <ng-container matColumnDef="id_function">
+                            <td mat-cell *matCellDef="let element" class="d-none">
+                             {{element.id_function}}
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="id_configurations">
+                            <td mat-cell *matCellDef="let element" class="d-none">
+                              {{element.id_configurations}}
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="objects_13_in_17">
+                            <td mat-cell *matCellDef="let element">
+                              <button mat-raised-button color="primary" type="button" (click)="openDialog('objects_13_in_17', element)" class="mat-typography text-small full-width-button">
+                                13:00 a 17:00
+                              </button>
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="objects_15_in_16">
+                            <td mat-cell *matCellDef="let element">
+                              <button mat-raised-button color="primary" type="button" (click)="openDialog('objects_15_in_16', element)" class="mat-typography text-small full-width-button">
+                                15:00 a 16:00
+                              </button>
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="objects_15_in_18">
+                            <td mat-cell *matCellDef="let element">
+                              <button mat-raised-button color="primary" type="button" (click)="openDialog('objects_15_in_18', element)" class="mat-typography text-small full-width-button">
+                                15:00 a 18:00
+                              </button>
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="objects_16_in_17">
+                            <td mat-cell *matCellDef="let element">
+                              <button mat-raised-button color="primary" type="button" (click)="openDialog('objects_16_in_17', element)" class="mat-typography text-small full-width-button">
+                                16:00 a 17:00
+                              </button>
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="objects_16_in_17_50">
+                            <td mat-cell *matCellDef="let element">
+                              <button mat-raised-button color="primary" type="button" (click)="openDialog('objects_16_in_17_50', element)" class="mat-typography text-small full-width-button">
+                                16:00 a 17:50
+                              </button>
+                            </td>
+                          </ng-container>
+
+                          <tr mat-row *matRowDef="let row; columns: displayedColumnsPatternTime.slice(7);"></tr>
+
+                        </table>
+
+                    </div>
+
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+                      <table mat-table [dataSource]="dataSourcePatternTime2" class="table table-responsive tablePattern">
+
+                        <ng-container matColumnDef="id_function">
+                          <td mat-cell *matCellDef="let element" class="d-none">
+                           {{element.id_function}}
+                          </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="id_configurations">
+                          <td mat-cell *matCellDef="let element" class="d-none">
+                            {{element.id_configurations}}
+                          </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="objects_8_in_10">
+                          <td mat-cell *matCellDef="let element">
+                            <button mat-raised-button color="primary" type="button" (click)="openDialog('objects_8_in_10', element)" class="mat-typography text-small full-width-button">
+                              08:00 a 10:00
+                            </button>
+                          </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="objects_08_in_13">
+                          <td mat-cell *matCellDef="let element">
+                            <button mat-raised-button color="primary" type="button" (click)="openDialog('objects_08_in_13', element)" class="mat-typography text-small full-width-button">
+                              08:00 a 13:00
+                            </button>
+                          </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="objects_08_in_14">
+                          <td mat-cell *matCellDef="let element">
+                            <button mat-raised-button color="primary" type="button" (click)="openDialog('objects_08_in_14', element)" class="mat-typography text-small full-width-button">
+                              08:00 a 14:00
+                            </button>
+                          </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="objects_11_in_13">
+                          <td mat-cell *matCellDef="let element">
+                            <button mat-raised-button color="primary" type="button" (click)="openDialog('objects_11_in_13', element)" class="mat-typography text-small full-width-button">
+                              11:00 a 13:00
+                            </button>
+                          </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="objects_12_in_13">
+                          <td mat-cell *matCellDef="let element">
+                            <button mat-raised-button color="primary" type="button" (click)="openDialog('objects_12_in_13', element)" class="mat-typography text-small full-width-button">
+                              12:00 a 13:00
+                            </button>
+                          </td>
+                        </ng-container>
+
+                        <tr mat-row *matRowDef="let row; columns: displayedColumnsPatternTime_2.slice(0, 7);"></tr>
+                      </table>
+
+                      <table mat-table [dataSource]="dataSourcePatternTime2" class="table table-responsive tablePattern">
+
+                        <ng-container matColumnDef="id_function">
+                          <td mat-cell *matCellDef="let element" class="d-none">
+                           {{element.id_function}}
+                          </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="id_configurations">
+                          <td mat-cell *matCellDef="let element" class="d-none">
+                            {{element.id_configurations}}
+                          </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="objects_13_in_17">
+                          <td mat-cell *matCellDef="let element">
+                            <button mat-raised-button color="primary" type="button" (click)="openDialog('objects_13_in_17', element)" class="mat-typography text-small full-width-button">
+                              13:00 a 17:00
+                            </button>
+                          </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="objects_15_in_16">
+                          <td mat-cell *matCellDef="let element">
+                            <button mat-raised-button color="primary" type="button" (click)="openDialog('objects_15_in_16', element)" class="mat-typography text-small full-width-button">
+                              15:00 a 16:00
+                            </button>
+                          </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="objects_15_in_18">
+                          <td mat-cell *matCellDef="let element">
+                            <button mat-raised-button color="primary" type="button" (click)="openDialog('objects_15_in_18', element)" class="mat-typography text-small full-width-button">
+                              15:00 a 18:00
+                            </button>
+                          </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="objects_16_in_17">
+                          <td mat-cell *matCellDef="let element">
+                            <button mat-raised-button color="primary" type="button" (click)="openDialog('objects_16_in_17', element)" class="mat-typography text-small full-width-button">
+                              16:00 a 17:00
+                            </button>
+                          </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="objects_16_in_17_50">
+                          <td mat-cell *matCellDef="let element">
+                            <button mat-raised-button color="primary" type="button" (click)="openDialog('objects_16_in_17_50', element)" class="mat-typography text-small full-width-button">
+                              16:00 a 17:50
+                            </button>
+                          </td>
+                        </ng-container>
+
+                        <tr mat-row *matRowDef="let row; columns: displayedColumnsPatternTime_2.slice(7);"></tr>
+                      </table>
+
+                    </div>
+
+                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+
+                      <table mat-table [dataSource]="dataSourcePatternTime3" class="table table-responsive tablePattern">
+
+                        <ng-container matColumnDef="id_function">
+                          <td mat-cell *matCellDef="let element" class="d-none">
+                           {{element.id_function}}
+                          </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="id_configurations">
+                          <td mat-cell *matCellDef="let element" class="d-none">
+                            {{element.id_configurations}}
+                          </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="objects_8_in_10">
+                          <td mat-cell *matCellDef="let element">
+                            <button mat-raised-button color="primary" type="button" (click)="openDialog('objects_8_in_10', element)" class="mat-typography text-small full-width-button">
+                              08:00 a 10:00
+                            </button>
+                          </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="objects_08_in_13">
+                          <td mat-cell *matCellDef="let element">
+                            <button mat-raised-button color="primary" type="button" (click)="openDialog('objects_08_in_13', element)" class="mat-typography text-small full-width-button">
+                              08:00 a 13:00
+                            </button>
+                          </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="objects_08_in_14">
+                          <td mat-cell *matCellDef="let element">
+                            <button mat-raised-button color="primary" type="button" (click)="openDialog('objects_08_in_14', element)" class="mat-typography text-small full-width-button">
+                              08:00 a 14:00
+                            </button>
+                          </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="objects_11_in_13">
+                          <td mat-cell *matCellDef="let element">
+                            <button mat-raised-button color="primary" type="button" (click)="openDialog('objects_11_in_13', element)" class="mat-typography text-small full-width-button">
+                              11:00 a 13:00
+                            </button>
+                          </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="objects_12_in_13">
+                          <td mat-cell *matCellDef="let element">
+                            <button mat-raised-button color="primary" type="button" (click)="openDialog('objects_12_in_13', element)" class="mat-typography text-small full-width-button">
+                              12:00 a 13:00
+                            </button>
+                          </td>
+                        </ng-container>
+
+                        <tr mat-row *matRowDef="let row; columns: displayedColumnsPatternTime_3.slice(0, 7);"></tr>
+                      </table>
+
+                      <table mat-table [dataSource]="dataSourcePatternTime3" class="table table-responsive tablePattern">
+
+                        <ng-container matColumnDef="id_function">
+                          <td mat-cell *matCellDef="let element" class="d-none">
+                           {{element.id_function}}
+                          </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="id_configurations">
+                          <td mat-cell *matCellDef="let element" class="d-none">
+                            {{element.id_configurations}}
+                          </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="objects_13_in_17">
+                          <td mat-cell *matCellDef="let element">
+                            <button mat-raised-button color="primary" type="button" (click)="openDialog('objects_13_in_17', element)" class="mat-typography text-small full-width-button">
+                              13:00 a 17:00
+                            </button>
+                          </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="objects_15_in_16">
+                          <td mat-cell *matCellDef="let element">
+                            <button mat-raised-button color="primary" type="button" (click)="openDialog('objects_15_in_16', element)" class="mat-typography text-small full-width-button">
+                              15:00 a 16:00
+                            </button>
+                          </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="objects_15_in_18">
+                          <td mat-cell *matCellDef="let element">
+                            <button mat-raised-button color="primary" type="button" (click)="openDialog('objects_15_in_18', element)" class="mat-typography text-small full-width-button">
+                              15:00 a 18:00
+                            </button>
+                          </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="objects_16_in_17">
+                          <td mat-cell *matCellDef="let element">
+                            <button mat-raised-button color="primary" type="button" (click)="openDialog('objects_16_in_17', element)" class="mat-typography text-small full-width-button">
+                              16:00 a 17:00
+                            </button>
+                          </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="objects_16_in_17_50">
+                          <td mat-cell *matCellDef="let element">
+                            <button mat-raised-button color="primary" type="button" (click)="openDialog('objects_16_in_17_50', element)" class="mat-typography text-small full-width-button">
+                              16:00 a 17:50
+                            </button>
+                          </td>
+                        </ng-container>
+
+                         <!-- Botón "Reiniciar patrón" -->
+                         <!-- <ng-container matColumnDef="reiniciar_patron">
+                          <td mat-cell *matCellDef="let element">
+                            <button mat-raised-button color="primary" type="button" (click)="reloadPatternTime(element.id_configurations)" class="mat-typography text-small full-width-button">
+                              Reiniciar patrón
+                            </button>
+                          </td>
+                        </ng-container> -->
+
+                        <tr mat-row *matRowDef="let row; columns: displayedColumnsPatternTime_3.slice(7);"></tr>
+                      </table>
+
+                    </div>
+
+                  </div>
+
+                  <button mat-raised-button color="primary" type="button" (click)="reloadPatternTime(selectedItem)" class="mat-typography text-small full-width-button">
+                    Reiniciar patron
+                  </button>
+
+                </mat-expansion-panel>
+              </mat-accordion>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="form-group">
+              <mat-accordion>
+                <mat-expansion-panel hideToggle>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Seleccionar Campaña a configurar
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <div class="mat-elevation-z8">
+                      <mat-form-field>
+                        <mat-label>Filter</mat-label>
+                        <input matInput (keyup)="searchCampaigns()" placeholder="Ex. ium" #inputCampaign [(ngModel)]="dataTableCampaign.search" [ngModelOptions]="{standalone: true}">
+                      </mat-form-field>
+
+                      <div class="table-responsive">
+                        <table mat-table [dataSource]="dataSourceCampaigns" class="mat-elevation-z8">
+
+                          <ng-container matColumnDef="check">
+                            <th mat-header-cell *matHeaderCellDef> Check </th>
+                            <td mat-cell *matCellDef="let element">
+                              <mat-checkbox
+                              [checked]="configurationCampaign.campaign_id == element.id"
+                              (change)="assignCampaign(element, $event)"
+                              >
+                              </mat-checkbox>
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="id">
+                            <th mat-header-cell *matHeaderCellDef> Id</th>
+                            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="camp_name">
+                            <th mat-header-cell *matHeaderCellDef> Campaña</th>
+                            <td mat-cell *matCellDef="let element"> {{element.camp_name}} </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="camp_description">
+                            <th mat-header-cell *matHeaderCellDef> Descripcion </th>
+                            <td mat-cell *matCellDef="let element"> {{element.camp_description}} </td>
+                          </ng-container>
+
+                          <tr mat-header-row *matHeaderRowDef="displayedColumnsCampaigns"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumnsCampaigns;"></tr>
+
+                          <ng-container class="mat-row" *matNoDataRow>
+                            <tr >
+                              <td class="mat-cell no-data-cell" colspan="13">NO HAY REGISTROS SOBRE "{{inputCampaign.value}}"</td>
+                            </tr>
+                          </ng-container>
+                        </table>
+                      </div>
+
+                      <mat-paginator
+                        [pageSize]="dataTableCampaign.perPage"
+                        [pageSizeOptions]="[5, 10, 25, 100]"
+                        [length]="dataTableCampaign.total"
+                        [pageSize]="dataTableCampaign.per_page"
+                        (page)="onPageChangeCampaign($event)"
+                        showFirstLastButtons
+                      ></mat-paginator>
+
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+            <div class="alert alert-danger" *ngIf="configurationCampaign.campaign_id === 0 && configurationCampaign.campaign_id !== undefined">
+              <div *ngIf="configurationCampaign.campaign_id === 0 && configurationCampaign.campaign_id !== undefined">
+                Debe seleccionar la Campaña que deseas configurar
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="assignment">
+          <div class="col-lg-12">
+            <div class="form-group">
+              <mat-accordion>
+                <mat-expansion-panel hideToggle>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Seleccionar las Asignaciones a configurar
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <div class="mat-elevation-z8">
+                      <mat-form-field>
+                        <mat-label>Filter</mat-label>
+                        <input matInput (keyup)="searchAssignments()" placeholder="Ex. ium" #inputAssignment [(ngModel)]="dataTableAssignment.search" [ngModelOptions]="{standalone: true}">
+                      </mat-form-field>
+
+                      <div class="table-responsive">
+                        <table mat-table [dataSource]="dataSourceAssignments" class="mat-elevation-z8">
+
+                          <ng-container matColumnDef="check">
+                            <th mat-header-cell *matHeaderCellDef> Check </th>
+                            <td mat-cell *matCellDef="let element">
+                              <mat-checkbox
+                              [checked]="configurationCampaign.assignment_id !== undefined && configurationCampaign.assignment_id.includes(element.id)"
+                              (change)="assignAssignment(element.id, $event)"
+                              >
+                              </mat-checkbox>
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="id">
+                            <th mat-header-cell *matHeaderCellDef> Id</th>
+                            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="assi_name">
+                            <th mat-header-cell *matHeaderCellDef> Asignacion</th>
+                            <td mat-cell *matCellDef="let element"> {{element.assi_name}} </td>
+                          </ng-container>
+
+                          <tr mat-header-row *matHeaderRowDef="displayedColumnsAssignments"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumnsAssignments;"></tr>
+
+                          <ng-container class="mat-row" *matNoDataRow>
+                            <tr >
+                              <td class="mat-cell no-data-cell" colspan="13">NO HAY REGISTROS SOBRE "{{inputAssignment.value}}"</td>
+                            </tr>
+                          </ng-container>
+                        </table>
+                      </div>
+
+                      <mat-paginator
+                        [pageSize]="dataTableAssignment.perPage"
+                        [pageSizeOptions]="[5, 10, 25, 100]"
+                        [length]="dataTableAssignment.total"
+                        [pageSize]="dataTableAssignment.per_page"
+                        (page)="onPageChangeAssignment($event)"
+                        showFirstLastButtons
+                      ></mat-paginator>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+            <div class="alert alert-danger" *ngIf="assignment && configurationCampaign.assignment_id !== undefined && configurationCampaign.assignment_id.length == 0">
+              <div *ngIf="assignment && configurationCampaign.assignment_id !== undefined && configurationCampaign.assignment_id.length == 0">
+                Debe seleccionar las asignaciones que desea configurar
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="form-group">
+              <mat-accordion>
+                <mat-expansion-panel hideToggle>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Asignar Gestores en la configuracion de la Campaña
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <div class="mat-elevation-z8">
+                      <mat-checkbox
+                        [checked]="unsigned"
+                        (change)="assignedUsers($event)"
+                        >
+                        Deseleccionar todos los ejecutivos
+                        </mat-checkbox>
+                      <mat-form-field>
+                        <mat-label>Filter</mat-label>
+                        <input matInput (keyup)="searchUsers()" placeholder="Ex. ium" #inputUsers [(ngModel)]="dataTableUsers.search" [ngModelOptions]="{standalone: true}">
+                      </mat-form-field>
+
+                      <div class="table-responsive">
+                        <table mat-table [dataSource]="dataSourceUsers" class="mat-elevation-z8">
+
+                          <ng-container matColumnDef="check">
+                            <th mat-header-cell *matHeaderCellDef> Check </th>
+                            <td mat-cell *matCellDef="let element">
+                              <mat-checkbox
+                              [checked]="configurationCampaign.users_assigned !== undefined && configurationCampaign.users_assigned.includes(element.id)"
+                              (change)="assignUsers(element.id, $event)"
+                              >
+                              </mat-checkbox>
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="id">
+                            <th mat-header-cell *matHeaderCellDef> Id </th>
+                            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="name">
+                            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                            <td mat-cell *matCellDef="let element"> {{element.name + ' ' + element.last_name}} </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="email">
+                            <th mat-header-cell *matHeaderCellDef> Correo Electronico </th>
+                            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                          </ng-container>
+
+                          <tr mat-header-row *matHeaderRowDef="displayedColumnsUsers"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumnsUsers;"></tr>
+
+                          <ng-container class="mat-row" *matNoDataRow>
+                            <tr >
+                              <td class="mat-cell no-data-cell" colspan="13">NO HAY REGISTROS SOBRE "{{inputUsers.value}}"</td>
+                            </tr>
+                          </ng-container>
+                        </table>
+                      </div>
+
+                      <mat-paginator
+                        [pageSize]="dataTableUsers.perPage"
+                        [pageSizeOptions]="[5, 10, 25, 100]"
+                        [length]="dataTableUsers.total"
+                        [pageSize]="dataTableUsers.per_page"
+                        (page)="onPageChangeUser($event)"
+                        showFirstLastButtons
+                      ></mat-paginator>
+
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+            <div class="alert alert-danger" *ngIf="configurationCampaign.users_assigned !== undefined && configurationCampaign.users_assigned.length == 0">
+              <div *ngIf="configurationCampaign.users_assigned.length == 0">
+                Debe seleccionar usuarios a trabajar en la Campaña
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="form-group">
+              <mat-accordion>
+                <mat-expansion-panel hideToggle>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Asignar Ciclos en la configuracion de la Campaña
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <div class="mat-elevation-z8">
+                      <mat-form-field>
+                        <mat-label>Filter</mat-label>
+                        <input matInput (keyup)="searchCycles()" placeholder="Ex. ium" #inputCycles [(ngModel)]="dataTableCycles.search" [ngModelOptions]="{standalone: true}">
+                      </mat-form-field>
+
+                      <div class="table-responsive">
+                        <table mat-table [dataSource]="dataSourceCycles" class="mat-elevation-z8">
+
+                          <ng-container matColumnDef="check">
+                            <th mat-header-cell *matHeaderCellDef> Check </th>
+                            <td mat-cell *matCellDef="let element">
+                              <mat-checkbox
+                              [checked]="configurationCampaign.cycle_code !== undefined && configurationCampaign.cycle_code.includes(element.id)"
+                              (change)="assignCycles(element.id, $event)"
+                              >
+                              </mat-checkbox>
+                            </td>
+                          </ng-container>
+
+
+                          <ng-container matColumnDef="cycle_name">
+                            <th mat-header-cell *matHeaderCellDef> Nombre Ciclo </th>
+                            <td mat-cell *matCellDef="let element"> {{element.cycle_name}} </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="cycle_start_date">
+                            <th mat-header-cell *matHeaderCellDef> Fecha Inicio </th>
+                            <td mat-cell *matCellDef="let element"> {{element.cycle_start_date}} </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="cycle_end_date">
+                            <th mat-header-cell *matHeaderCellDef> Fecha Fin </th>
+                            <td mat-cell *matCellDef="let element"> {{element.cycle_end_date}} </td>
+                          </ng-container>
+
+                          <tr mat-header-row *matHeaderRowDef="displayedColumnsCycles"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumnsCycles;"></tr>
+
+                          <ng-container class="mat-row" *matNoDataRow>
+                            <tr >
+                              <td class="mat-cell no-data-cell" colspan="13">NO HAY REGISTROS SOBRE "{{inputCycles.value}}"</td>
+                            </tr>
+                          </ng-container>
+                        </table>
+                      </div>
+
+                      <mat-paginator
+                        [pageSize]="dataTableCycles.perPage"
+                        [pageSizeOptions]="[5, 10, 25, 100]"
+                        [length]="dataTableCycles.total"
+                        [pageSize]="dataTableCycles.per_page"
+                        (page)="onPageChangeCycles($event)"
+                        showFirstLastButtons
+                      ></mat-paginator>
+
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+            <div class="alert alert-danger" *ngIf="configurationCampaign.cycle_code !== undefined && configurationCampaign.cycle_code.length == 0">
+              <div *ngIf="configurationCampaign.cycle_code.length == 0">
+                Debe seleccionar los ciclos de la Campaña
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="form-group">
+              <mat-accordion>
+                <mat-expansion-panel hideToggle>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Asignar Foco en la configuracion de la Campaña
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <div class="mat-elevation-z8">
+                      <mat-form-field>
+                        <mat-label>Filter</mat-label>
+                        <input matInput (keyup)="searchFocus()" placeholder="Ex. ium" #inputFocus [(ngModel)]="dataTableFocus.search" [ngModelOptions]="{standalone: true}">
+                      </mat-form-field>
+
+                      <div class="table-responsive">
+                        <table mat-table [dataSource]="dataSourceFocus" class="mat-elevation-z8">
+
+                          <ng-container matColumnDef="check">
+                            <th mat-header-cell *matHeaderCellDef> Check </th>
+                            <td mat-cell *matCellDef="let element">
+                              <mat-checkbox
+                              [checked]="configurationCampaign.focus_ids !== undefined && configurationCampaign.focus_ids.includes(element.id)"
+                              (change)="assignFocus(element.id, $event)"
+                              >
+                              </mat-checkbox>
+                            </td>
+                          </ng-container>
+
+
+                          <ng-container matColumnDef="focus_name">
+                            <th mat-header-cell *matHeaderCellDef> Nombre del Foco </th>
+                            <td mat-cell *matCellDef="let element"> {{element.focus_name}} </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="focus_description">
+                            <th mat-header-cell *matHeaderCellDef> Descripcion del Foco </th>
+                            <td mat-cell *matCellDef="let element"> {{element.focus_description}} </td>
+                          </ng-container>\
+
+                          <tr mat-header-row *matHeaderRowDef="displayedColumnsFocus"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumnsFocus;"></tr>
+
+                          <ng-container class="mat-row" *matNoDataRow>
+                            <tr >
+                              <td class="mat-cell no-data-cell" colspan="13">NO HAY REGISTROS SOBRE "{{inputFocus.value}}"</td>
+                            </tr>
+                          </ng-container>
+                        </table>
+                      </div>
+
+                      <mat-paginator
+                        [pageSize]="dataTableFocus.perPage"
+                        [pageSizeOptions]="[5, 10, 25, 100]"
+                        [length]="dataTableFocus.total"
+                        [pageSize]="dataTableFocus.per_page"
+                        (page)="onPageChangeFocus($event)"
+                        showFirstLastButtons
+                      ></mat-paginator>
+
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+            <div class="alert alert-danger" *ngIf="configurationCampaign.focus_ids !== undefined && configurationCampaign.focus_ids.length == 0">
+              <div *ngIf="configurationCampaign.focus_ids.length == 0">
+                Debe seleccionar los focos de la Campaña
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="form-group">
+              <mat-accordion>
+                <mat-expansion-panel hideToggle>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Asignar cordinador en la configuracion de la Campaña
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <div class="mat-elevation-z8">
+
+                      <div class="table-responsive">
+                        <table mat-table [dataSource]="dataSourceUsersCoordinador" class="mat-elevation-z8">
+
+                           <ng-container matColumnDef="check">
+                            <th mat-header-cell *matHeaderCellDef> Check </th>
+                            <td mat-cell *matCellDef="let element">
+                              <mat-checkbox
+                              [checked]=" configurationCampaign.userCoordinador_id !== undefined && configurationCampaign.userCoordinador_id.includes(element.id)"
+                              (change)="assignUserCam(element.id, $event)"
+                              >
+                              </mat-checkbox>
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="id">
+                            <th mat-header-cell *matHeaderCellDef> Id </th>
+                            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="name">
+                            <th mat-header-cell *matHeaderCellDef> Nombre del cordinador </th>
+                            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="email">
+                            <th mat-header-cell *matHeaderCellDef> Correo </th>
+                            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                          </ng-container>
+
+                          <tr mat-header-row *matHeaderRowDef="displayedColumnsUsersCoordinador"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumnsUsersCoordinador;"></tr>
+
+                          <ng-container class="mat-row" *matNoDataRow>
+                            <tr >
+                              <td class="mat-cell no-data-cell" colspan="13">NO HAY REGISTROS SOBRE "{{inputFocus.value}}"</td>
+                            </tr>
+                          </ng-container>
+                        </table>
+                      </div>
+
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+
+          </div>
+        </div>
+
+        <button type="button" class="btn btn-secondary m-1" (click)="indexConfigurationCampaigns()">Devolver</button>
+        <button type="submit" class="btn btn-success m-1" [disabled]="!campaignsForm.form['valid']">Guardar</button>
+      </div>
+    </div>
+  </div>
+</form>
+
+<div class="modal-backdrop fade show" *ngIf="isDialogShow"></div>
+<div class="modal {{ isDialogShow ? 'fade show' : '' }}" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-modal="true" role="dialog" style="display: block;" *ngIf="isDialogShow">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header" style="display: flex; justify-content: center;">
+        <h1 class="modal-title fs-5" id="exampleModalCenterTitle">Visualizar datos de horario</h1>
+      </div>
+
+      <div class="modal-body row">
+        <div class="col-md-6">
+          <label for="noEfectiva1">No Efectiva 1:</label>
+          <input type="text" id="noEfectiva1" [(ngModel)]="selectedItem.no_efectiva_1" class="form-control" placeholder="No Efectiva 1">
+          <div class="alert alert-danger danger" *ngIf="isInvalid('no_efectiva_1')">
+              ¡'No efectiva 1' no puede ir vacio!
+          </div>
+          <div class="alert alert-danger danger" *ngIf="isComparisonInvalid()">
+            ¡'No efectiva 1' no puede ser mayor que 'No efectiva 2'!
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="noEfectiva2">No Efectiva 2:</label>
+          <input type="text" id="noEfectiva2" [(ngModel)]="selectedItem.no_efectiva_2" class="form-control" placeholder="No Efectiva 2">
+          <div class="alert alert-danger danger" *ngIf="isInvalid('no_efectiva_2')">
+              ¡'No efectiva 2' no puede ir vacio'!
+          </div>
+          <div class="alert alert-danger danger" *ngIf="isComparisonInvalid()">
+            ¡'No efectiva 2' no puede ser menor que 'No efectiva 1'!
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="efectiva">Efectiva:</label>
+          <input type="text" id="efectiva" [(ngModel)]="selectedItem.efectiva" class="form-control" placeholder="Efectiva">
+            <div class="alert alert-danger danger" *ngIf="isInvalid('efectiva')">
+              ¡'Efectiva' no puede ir vacio!
+            </div>
+        </div>
+        <div class="col-md-6">
+          <label for="promesa">Promesa:</label>
+          <input type="text" id="promesa" [(ngModel)]="selectedItem.promesa" class="form-control" placeholder="Promesa">
+            <div class="alert alert-danger danger" *ngIf="isInvalid('promesa')">
+              ¡'Promesa' no puede ir vacio!
+            </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeDialog()">Cerrar</button>
+        <button type="button" class="btn btn-primary" (click)="onSubmitPatternTime()" [disabled]="isInvalid('no_efectiva_1') || isInvalid('no_efectiva_2') || isInvalid('efectiva') || isInvalid('promesa') || isComparisonInvalid()">Actualizar</button>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,54 @@
+<div class="col-md-6 offset-md-3">
+  <h3 class="text-center">Edicion de Roles y Permisos</h3>
+  <form (ngSubmit)="onSubmit()" #rolAndPermissionForm="ngForm">
+
+    <div class="form-group">
+      <label for="name">Rol</label>
+      <input type="text"
+      class="form-control mb-3"
+      id="role"
+      [(ngModel)]="rolesAndPermissions.roles"
+      name="rol"
+      required
+      maxlength="50"
+      placeholder="Digite nombre del rol"
+      #nameRol="ngModel" disabled>
+      <div class="alert alert-danger" *ngIf="nameRol.invalid && (nameRol.dirty || nameRol.touched)">
+        <div *ngIf="nameRol.errors?.['required']">
+          El nombre del rol es requerido
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="name">Permisos</label>
+      <div *ngFor="let permission of permissionss; let i = index">
+        <div class="input-group mb-3">
+          <input
+            type="text"
+            class="form-control"
+            [attr.id]="'permission' + i"
+            [(ngModel)]="permission.name"
+            [ngModelOptions]="{standalone: true}"
+            [name]="'permission' + i"
+            required
+            maxlength="50"
+            placeholder="Nombre del permiso"
+            #permissionInput="ngModel">
+          <div class="input-group-append">
+            <button class="btn btn-danger" type="button" (click)="removePermission(i)">Eliminar</button>
+          </div>
+        </div>
+        <div class="alert alert-danger" *ngIf="permissionInput.invalid && (permissionInput.dirty || permissionInput.touched)">
+          <div *ngIf="permissionInput.errors?.['required']">
+            El nombre del permiso es requerido
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <button type="button" class="btn btn-primary m-1" (click)="addPermission()">Agregar Permiso</button>
+    <button type="button" class="btn btn-secondary m-1" (click)="indexRolesAndPermissions()">Devolver</button>
+    <button type="submit" class="btn btn-success m-1">Guardar</button>
+  </form>
+</div>

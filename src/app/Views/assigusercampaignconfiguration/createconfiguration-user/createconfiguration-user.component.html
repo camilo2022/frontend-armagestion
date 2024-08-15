@@ -1,0 +1,172 @@
+<form>
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <div class="col-lg-12">
+          <h3 class="text-center">Registro de usuarios a la configuracion</h3>
+           <div class="row">
+            <div class="col-lg-6">
+              <div class="form-group">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Cantidad minima interacciones </mat-label>
+                  <input
+                  matInput
+                  type="number"
+                  id="user_interactions_min_count"
+                  name="user_interactions_min_count"
+                  required
+                  placeholder="Digite el minimo de registros por Usuario">
+                </mat-form-field>
+               
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Cantidad maxima interacciones </mat-label>
+                  <input
+                  matInput
+                  type="number"
+                  id="user_interactions_max_count"
+                 
+                  name="user_interactions_max_count"
+                  required
+                  placeholder="Digite el maximo de registros por Usuario"
+                  >
+                </mat-form-field>
+             
+              </div>
+            </div>
+          </div> 
+  
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="form-group">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Porcentaje de efectividad </mat-label>
+                  <input
+                  matInput
+                  type="number"
+                  id="effectiveness_percentage"
+                  name="effectiveness_percentage"
+                  min="1"
+                  max="100"
+                  required
+                  placeholder="Digite el Porcentaje de efectividad esperado"
+                  >
+                </mat-form-field>
+                
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Porcentaje acuerdos de pago </mat-label>
+                  <input
+                  matInput
+                  type="number"
+                  id="payment_agreement_percentage"
+                  
+                  name="payment_agreement_percentage"
+                  min="1"
+                  max="100"
+                  required
+                  placeholder="Digite el Porcentaje acuerdos de pago esperado"
+                  >
+                </mat-form-field>
+                
+              </div>
+            </div>
+          </div>
+  
+         <div class="row">
+            <div class="col-lg-6">
+              <div class="form-group">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Porcentaje acuerdos de pago veridicos * </mat-label>
+                  <input
+                  matInput
+                  type="number"
+                  id="payment_agreement_true_percentage"
+                  
+                  name="payment_agreement_true_percentage"
+                  min="1"
+                  max="100"
+                  placeholder="Digite el Porcentaje acuerdos de tipos de servicio"
+                  >
+                </mat-form-field>
+              
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Porcentaje tipo de servicio </mat-label>
+                  <input
+                  matInput
+                  type="number"
+                  id="type_service_percentage"
+                  
+                  name="type_service_percentage"
+                  min="1"
+                  max="100"
+                  placeholder="Digite el Porcentaje acuerdos de tipos de servicio"
+                  >
+                </mat-form-field>
+              </div>
+            </div>
+          </div> 
+
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="form-group">
+                
+                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                 <!--  <ng-container matColumnDef="check">
+                    <th mat-header-cell *matHeaderCellDef> Check </th>
+                    <td mat-cell *matCellDef="let element">
+                      <mat-checkbox
+                      [checked]="AssigUserConfiguratio.usergetcoodin !== undefined && AssigUserConfiguratio.usergetcoodin.includes(element.id)"
+                      (change)="assignUserCam(element.id, $event)"
+                      >
+                      </mat-checkbox>
+                    </td>
+                  </ng-container> -->
+
+                  <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef> Id </th>
+                    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                  </ng-container>
+          
+                   <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef> Nombre usuario</th>
+                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                  </ng-container>
+          
+                  <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef> Correo </th>
+                    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                  </ng-container>
+          
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          
+                   <ng-container class="mat-row" *matNoDataRow>
+                    <tr >
+                      <td class="mat-cell no-data-cell" colspan="7">NO HAY REGISTROS SOBRE </td>
+                    </tr>
+                  </ng-container> 
+          
+              </table>
+
+              </div>
+            </div>
+          </div>
+
+           <!-- <button type="button" class="btn btn-secondary m-1" (click)="indexConfigurationCampaigns()">Devolver</button>
+          <button type="submit" class="btn btn-success m-1" [disabled]="!campaignsForm.form['valid']">Guardar</button>  -->
+          
+        </div>
+      </div>
+    </div>
+  </form>

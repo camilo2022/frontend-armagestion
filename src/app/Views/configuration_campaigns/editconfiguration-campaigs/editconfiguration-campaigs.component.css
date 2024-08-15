@@ -1,0 +1,85 @@
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.mat-cell.no-data-cell {
+  text-align: center;
+}
+
+tr.example-detail-row {
+  height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+.example-element-description {
+  padding: 16px;
+}
+
+.tablePattern {
+  display: flex;
+  justify-content: center;
+}
+
+/* Cambiar el color del texto de los enlaces de navegación */
+.custom-nav-link {
+  color: #212121 !important;
+  font-weight: 500;
+}
+
+/* Cambiar el color del texto de los enlaces activos */
+.custom-nav-link.active {
+  color: #000000 !important;
+}
+
+
+.full-width-button {
+  text-align: center; /* Alinea el texto horizontalmente */
+  display: flex;
+  justify-content: center; /* Centra el texto verticalmente */
+  align-items: center;
+  font-size: 13px;
+  background-color: #ffffff !important;
+  border: 1px solid #b3b3b3;
+  color: rgb(44, 44, 44) !important;
+  font-weight: 450 !important;
+  transition: background-color 0.3s ease;
+}
+
+.full-width-button:hover {
+  background-color: #F5F5F5 !important;
+}
+
+.danger {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  padding: 5px 12px;
+  text-align: justify;
+  font-size: small;
+}

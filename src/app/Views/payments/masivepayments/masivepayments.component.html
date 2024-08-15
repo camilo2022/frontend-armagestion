@@ -1,0 +1,30 @@
+<div class="col-md-6 offset-md-3">
+  <h3 class="text-center">Masivo de pagos</h3>
+  <form (ngSubmit)="onSubmit()" #paymentsForm="ngForm" enctype="multipart/form-data">
+
+    <div class="form-group">
+      <mat-form-field class="example-full-width">
+        <mat-label>Archivo de Pagos</mat-label>
+        <input matInput readonly type="text" id="fakeFileInput" (click)="hiddenInput.click()">
+        <input hidden
+        type="file"
+        #hiddenInput
+        required
+        (change)="GetFileOnLoad($event)"
+        accept=".csv, .xls, .xlsx, .txt">
+        <mat-icon matSuffix>folder_open</mat-icon>
+      </mat-form-field>
+    </div>
+    <div class="alert alert-danger" *ngIf="pay.pays_file === null">
+      <div *ngIf="pay.pays_file === null">
+        Debe seleccionar el Archivo masivo de pagos
+      </div>
+    </div>
+
+    <button type="button" class="btn btn-secondary m-1" (click)="indexPayments()">Devolver</button>
+    <button type="submit" class="btn btn-success m-1" [disabled]="!paymentsForm.form['valid'] || processingFile">Guardar</button>
+    <img src="assets/Images/loading.png" alt="" style="position:absolute;width:30%;top:33%;left:37%;" *ngIf="processingFile">
+  </form>
+</div>
+
+

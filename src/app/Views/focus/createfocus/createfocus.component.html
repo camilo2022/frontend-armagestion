@@ -1,0 +1,48 @@
+<div class="col-md-6 offset-md-3">
+  <h3 class="text-center">Registro del foco</h3>
+  <form (ngSubmit)="onSubmit()" #focusForm="ngForm">
+    <div class="form-group">
+      <mat-form-field class="example-full-width">
+        <mat-label>Nombre del foco</mat-label>
+        <input
+        matInput
+        class="mb-2"
+        id="focus_name"
+        [(ngModel)]="focus.focus_name"
+        name="focus_name"
+        required
+        placeholder="Digite nombre del foco"
+        #focus_name="ngModel">
+      </mat-form-field>
+      <div class="alert alert-danger" *ngIf="focus_name.invalid && (focus_name.dirty || focus_name.touched)">
+        <div *ngIf="focus_name.errors?.['required']">
+          El nombre del foco es requerido
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <mat-form-field class="example-full-width">
+        <mat-label>Descripcion del foco</mat-label>
+        <textarea
+        rows="3"
+        matInput
+        class="mb-2"
+        id="focus_description"
+        [(ngModel)]="focus.focus_description"
+        name="focus_description"
+        required
+        placeholder="Digite Descripcion del foco"
+        #focus_description="ngModel"></textarea>
+      </mat-form-field>
+      <div class="alert alert-danger" *ngIf="focus_description.invalid && (focus_description.dirty || focus_description.touched)">
+        <div *ngIf="focus_description.errors?.['required']">
+          La Descripcion del foco es requerido
+        </div>
+      </div>
+    </div>
+    <button type="button" class="btn btn-secondary m-1" (click)="indexFocus()">Devolver</button>
+    <button type="submit" class="btn btn-success m-1" [disabled]="!focusForm.form['valid']">Guardar</button>
+  </form>
+</div>
+
+

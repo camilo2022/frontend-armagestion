@@ -1,0 +1,142 @@
+<form (ngSubmit)="onSubmit()" #campaignsForm="ngForm">
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="text-center">Edicion de Campañas</h3>
+
+
+        <!-- <div class="form-group">
+          <mat-form-field class="example-full-width">
+            <mat-label>CSTS</mat-label>
+            <mat-select
+              class="mb-2"
+              id="csts_id"
+              [(ngModel)]="campaign.csts_id"
+              name="csts_id"
+              required
+              placeholder="Seleccione csts"
+              #csts_id="ngModel">
+              <mat-option [value]="1">Prueba CSTS 1</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="alert alert-danger" *ngIf="csts_id.invalid && (csts_id.dirty || csts_id.touched)">
+            <div *ngIf="csts_id.errors?.['required']">
+              Debe seleccionar un csts
+            </div>
+          </div>
+        </div> -->
+
+        <div class="form-group">
+          <mat-form-field class="example-full-width">
+            <mat-label>Nombre de la campaña</mat-label>
+            <input
+            matInput
+            class="mb-2"
+            id="camp_name"
+            [(ngModel)]="campaign.camp_name"
+            name="camp_name"
+            required
+            placeholder="Digite nombre de la campaña"
+            #camp_name="ngModel">
+          </mat-form-field>
+          <div class="alert alert-danger" *ngIf="camp_name.invalid && (camp_name.dirty || camp_name.touched)">
+            <div *ngIf="camp_name.errors?.['required']">
+              El nombre de la campaña es requerido
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field class="example-full-width">
+            <mat-label>Descripcion de la campaña</mat-label>
+            <textarea
+            rows="3"
+            matInput
+            class="mb-2"
+            id="camp_description"
+            [(ngModel)]="campaign.camp_description"
+            name="camp_description"
+            required
+            placeholder="Digite Descripcion de la campaña"
+            #camp_description="ngModel"></textarea>
+          </mat-form-field>
+          <div class="alert alert-danger" *ngIf="camp_description.invalid && (camp_description.dirty || camp_description.touched)">
+            <div *ngIf="camp_description.errors?.['required']">
+              La Descripcion de la campaña es requerido
+            </div>
+          </div>
+        </div>
+
+
+        <button type="button" class="btn btn-secondary m-1" (click)="indexCampaigns()">Devolver</button>
+        <button type="submit" class="btn btn-success m-1" [disabled]="!campaignsForm.form['valid']">Guardar</button>
+
+    </div>
+    <div class="col-md-6">
+      <h3 class="text-center">Coordinador o Administrador encargado</h3>
+      <div class="form-group">
+        <div class="mat-elevation-z8">
+          <mat-form-field>
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="searchUsers()" placeholder="Ex. ium" #input [(ngModel)]="dataTable.search" [ngModelOptions]="{standalone: true}">
+          </mat-form-field>
+
+          <div class="table-responsive">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+              <ng-container matColumnDef="check">
+                <th mat-header-cell *matHeaderCellDef> Check </th>
+                <td mat-cell *matCellDef="let element">
+                  <mat-checkbox
+                  [checked]="element.id == campaign.user_id"
+                  (change)="assignManager(element.id, $event)"
+                  >
+                  </mat-checkbox>
+                </td>
+              </ng-container>
+
+
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="last_name">
+                <th mat-header-cell *matHeaderCellDef> Apellido </th>
+                <td mat-cell *matCellDef="let element"> {{element.last_name}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef> Correo Electronico </th>
+                <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+              <ng-container class="mat-row" *matNoDataRow>
+                <tr >
+                  <td class="mat-cell no-data-cell" colspan="13">NO HAY REGISTROS SOBRE "{{input.value}}"</td>
+                </tr>
+              </ng-container>
+            </table>
+          </div>
+
+          <mat-paginator
+            [pageSize]="dataTable.perPage"
+            [pageSizeOptions]="[5, 10, 25, 100]"
+            [length]="dataTable.total"
+            [pageSize]="dataTable.per_page"
+            (page)="onPageChange($event)"
+            showFirstLastButtons
+          ></mat-paginator>
+
+        </div>
+      </div>
+      <div class="alert alert-danger" *ngIf="campaign.user_id == 0">
+        <div *ngIf="campaign.user_id == 0">
+          Debe seleccionar un Coordinador o Administrador que gestione la Campaña
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

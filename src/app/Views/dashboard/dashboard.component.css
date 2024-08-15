@@ -1,0 +1,24 @@
+body{
+    background: linear-gradient(to left, rgba(55, 114, 216, 0) ,rgba(29, 111, 165, 0.404), rgba(29, 111, 165, 0.404),rgba(29, 111, 165, 0.404),rgba(29, 111, 165, 0.404),rgba(55, 114, 216, 0) );
+    height: 81vh;
+    position: relative;
+    top:-3vh;
+    height: 83vh;
+}
+
+
+.background-container {
+    background-image: url('../../../assets/Images/logo_empresa2.png'); /* Cambia 'ruta-de-tu-imagen.jpg' por la ruta real de tu imagen */
+    
+    background-repeat: no-repeat;
+    height:70vh; /* Establece la altura al 100% de la ventana */
+    width: 90%; 
+    margin: 0;
+    padding: 0;
+    background-position: center center; 
+   
+     /* Utiliza flexbox para controlar el alineamiento vertical */
+ 
+    /* box-sizing: border-box; */
+    /* Agrega otros estilos según sea necesario para el contenido del componente */
+  }

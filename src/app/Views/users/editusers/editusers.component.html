@@ -1,0 +1,139 @@
+<div class="col-md-6 offset-md-3">
+  <h3 class="text-center">Edicion de Usuario</h3>
+  <form (ngSubmit)="onSubmit()" #usersForm="ngForm">
+
+    <div class="form-group">
+      <mat-form-field class="example-full-width">
+        <mat-label>Nombres</mat-label>
+        <input
+        matInput
+        id="name"
+        [(ngModel)]="user.name"
+        name="name"
+        required
+        placeholder="Digite nombre del Usuario"
+        #name="ngModel">
+      </mat-form-field>
+      <div class="alert alert-danger" *ngIf="name.invalid && (name.dirty || name.touched)">
+        <div *ngIf="name.errors?.['required']">
+          El nombre es requerido
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field class="example-full-width">
+        <mat-label>Apellidos</mat-label>
+        <input
+        matInput
+        id="last_name"
+        [(ngModel)]="user.last_name"
+        name="last_name"
+        required
+        placeholder="Digite apellidos del Usuario"
+        #last_name="ngModel">
+      </mat-form-field>
+      <div class="alert alert-danger" *ngIf="last_name.invalid && (last_name.dirty || last_name.touched)">
+        <div *ngIf="last_name.errors?.['required']">
+          El apellido es requerido
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field class="example-full-width">
+        <mat-label>Numero de Documento</mat-label>
+        <input
+        matInput
+        id="document_number"
+        [(ngModel)]="user.document_number"
+        name="document_number"
+        required
+        minlength="5"
+        maxlength="20"
+        placeholder="Digite numero de documento del Usuario"
+        #document_number="ngModel"
+        (input)="onNumberInput($event)">
+      </mat-form-field>
+      <div class="alert alert-danger" *ngIf="document_number.invalid && (document_number.dirty || document_number.touched)">
+        <div *ngIf="document_number.errors?.['required']">
+          El numero de documento es requerido
+        </div>
+        <div *ngIf="document_number.errors?.['minlength']">
+          El numero de documento debe tener minimo 5 caracteres
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field class="example-full-width">
+        <mat-label>Numero de Telefono</mat-label>
+        <input
+        matInput
+        id="phone_number"
+        [(ngModel)]="user.phone_number"
+        name="phone_number"
+        required
+        pattern="^[0-9]+$"
+        maxlength="10"
+        minlength="10"
+        placeholder="Digite numero de telefono del Usuario"
+        #phone_number="ngModel"
+        (input)="onNumberInput($event)">
+      </mat-form-field>
+      <div class="alert alert-danger" *ngIf="phone_number.invalid && (phone_number.dirty || phone_number.touched)">
+        <div *ngIf="phone_number.errors?.['required']">
+          El numero de telefono es requerido
+        </div>
+        <div *ngIf="phone_number.errors?.['minlength'] || phone_number.errors?.['pattern']">
+          El numero de telefono debe tener 10 digitos
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field class="example-full-width">
+        <mat-label>Direccion</mat-label>
+        <input
+        matInput
+        id="address"
+        [(ngModel)]="user.address"
+        name="address"
+        required
+        placeholder="Digite direccion del Usuario"
+        #address="ngModel">
+      </mat-form-field>
+      <div class="alert alert-danger" *ngIf="address.invalid && (address.dirty || address.touched)">
+        <div *ngIf="address.errors?.['required']">
+          La direccion es requerido
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field class="example-full-width">
+        <mat-label>Correo</mat-label>
+        <input
+        matInput
+        id="email"
+        [(ngModel)]="user.email"
+        name="email"
+        required
+        pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"
+        placeholder="Digite correo del Usuario"
+        #email="ngModel">
+      </mat-form-field>
+      <div class="alert alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+        <div *ngIf="email.errors?.['required']">
+          El correo es requerido
+        </div>
+        <div *ngIf="email.errors?.['pattern']">
+          El correo debe tener el formato example@example.com
+        </div>
+      </div>
+    </div>
+
+    <button type="button" class="btn btn-secondary m-1" (click)="indexUsers()">Devolver</button>
+    <button type="submit" class="btn btn-success m-1" [disabled]="!usersForm.form['valid']">Guardar</button>
+  </form>
+</div>

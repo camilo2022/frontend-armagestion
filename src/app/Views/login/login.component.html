@@ -1,0 +1,216 @@
+<section >
+  <div class="container-fluid h-custom"> 
+   <div class="row d-flex justify-content-center align-items-center h-10"> 
+
+    <div class="col-md-8 col-lg-6 col-xl-4 mt-3">
+
+         <form  (ngSubmit)="onSubmit()" #loginForm="ngForm">
+
+           <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+
+               <h3 class="fw-normal font-weight-bold">Iniciar sesion</h3>
+
+           </div>
+
+               <div class="comptop">
+
+               <div class="divider d-flex align-items-center my-4">
+                 <p class="text-center fw-bold mx-3 mb-0">
+                   <img src="assets/Images/icouser.jpg" width="80">
+                 </p>
+               </div>
+
+               <div class="form-outline mb-4">
+                 <label class="form-label text-justify" for="email">Correo eletronico</label>
+                 <input
+                 class="form-control form-control-md"
+                 id="email"
+                 [(ngModel)]="login.email"
+                 name="email"
+                 required
+                 pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"
+                 placeholder="Ingrese su correo electronico"
+                 #email="ngModel"> <br>
+                 <div class="alert alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+                   <div *ngIf="email.errors?.['required']">
+                     El correo electronico es requerido.
+                   </div>
+                   <div *ngIf="email.errors?.['pattern']">
+                     El formato del correo no es valido
+                   </div>
+                 </div>
+                 <div class="alert alert-danger" *ngIf="errorEmail">
+                   <div *ngIf="errorEmail">
+                     El correo electronico no existe
+                   </div>
+                 </div>
+               </div>
+
+          
+             <div class="form-outline mb-4">
+               <label class="form-label text-justify" for="password">Contraseña</label>
+               <input
+               class="form-control form-control-md"
+               id="password"
+               type="password"
+               [(ngModel)]="login.password"
+               name="password"
+               required
+               placeholder="Ingrese su contraseña"
+               #password="ngModel"> <br>
+               <div class="alert alert-danger" *ngIf="password.invalid && (password.dirty || password.touched)">
+                 <div *ngIf="password.errors?.['required']">
+                   La Contraseña es requerida.
+                 </div>
+               </div>
+               <div class="alert alert-danger" *ngIf="errorPassword">
+                 <div *ngIf="errorPassword">
+                   La contraseña es incorrecta
+                 </div>
+               </div>
+             </div>
+
+               <div class="text-center text-lg-start  pt-2">
+                   <div class="text-center">
+                 <button type="submit" class="btn btn-primary btn-lg"
+                   style="padding-left: 2.5rem; padding-right: 2.5rem;"
+                   [disabled]="!loginForm.form['valid']">Login</button>
+               </div>
+
+             </div>
+
+           </div>
+
+         </form>
+
+     </div>
+
+     <div class="col-md-9 col-lg-6 col-xl-5 mt-3">
+
+       <img src="assets/Images/login.jpg"
+         class="img-fluid imglogtam" alt="Sample image">
+     </div>
+
+   </div> 
+
+  </div> 
+<!--   <div
+   class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
+   
+   <div class="text-white mb-3 mb-md-0">
+     Copyright © 2023. Derechos reservados Red-Instantic.
+   </div>
+
+ </div>  -->
+</section>
+
+<!-- <section class="vh-100">
+    <div class="container-fluid h-custom">
+      <div class="row d-flex justify-content-center align-items-center h-90">
+
+        <div class="col-md-8 col-lg-6 col-xl-4 mt-4">
+
+            <form  (ngSubmit)="onSubmit()" #loginForm="ngForm" autocomplete="off">
+
+
+              <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start mt-4">
+
+                  <h3 class="fw-normal mt-4 font-weight-bold">Iniciar sesion</h3>
+
+
+                  </div>
+
+                  <div class="comptop">
+
+                  <div class="divider d-flex align-items-center my-4">
+                    <p class="text-center fw-bold mx-3 mb-0">
+                      <img src="assets/Images/icouser.jpg" width="80">
+                    </p>
+                  </div>
+
+
+                  <div class="form-outline mb-4">
+                    <label class="form-label text-justify" for="email">Correo eletronico</label>
+                    <input
+                    class="form-control form-control-md"
+                    id="email"
+                    [(ngModel)]="login.email"
+                    name="email"
+                    required
+                    pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"
+                    placeholder="Ingrese su correo electronico"
+                    #email="ngModel"> <br>
+                    <div class="alert alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+                      <div *ngIf="email.errors?.['required']">
+                        El correo electronico es requerido.
+                      </div>
+                      <div *ngIf="email.errors?.['pattern']">
+                        El formato del correo no es valido
+                      </div>
+                    </div>
+                    <div class="alert alert-danger" *ngIf="errorEmail">
+                      <div *ngIf="errorEmail">
+                        El correo electronico no existe
+                      </div>
+                    </div>
+                  </div>
+
+           
+                <div class="form-outline mb-4">
+                  <label class="form-label text-justify" for="password">Contraseña</label>
+                  <input
+                  class="form-control form-control-md"
+                  id="password"
+                  type="password"
+                  [(ngModel)]="login.password"
+                  name="password"
+                  required
+                  placeholder="Ingrese su contraseña"
+                  #password="ngModel"> <br>
+                  <div class="alert alert-danger" *ngIf="password.invalid && (password.dirty || password.touched)">
+                    <div *ngIf="password.errors?.['required']">
+                      La Contraseña es requerida.
+                    </div>
+                  </div>
+                  <div class="alert alert-danger" *ngIf="errorPassword">
+                    <div *ngIf="errorPassword">
+                      La contraseña es incorrecta
+                    </div>
+                  </div>
+                </div>
+
+                  <div class="text-center text-lg-start mt-4 pt-2">
+                      <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-lg"
+                      style="padding-left: 2.5rem; padding-right: 2.5rem;"
+                      [disabled]="!loginForm.form['valid']">Login</button>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </form>
+
+          </div>
+
+
+
+
+        <div class="col-md-9 col-lg-6 col-xl-5 mt-3">
+
+          <img src="assets/Images/login.jpg"
+            class="img-fluid imglogtam mt-3" alt="Sample image">
+        </div>
+
+      </div>
+    </div>
+    <div
+      class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
+     
+      <div class="text-white mb-3 mb-md-0">
+        Copyright © 2023. Derechos reservados Red-Instantic.
+      </div>
+   
+    </div>
+  </section> -->

@@ -1,0 +1,50 @@
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top ml-auto">
+    <a class="navbar-brand letter" href="#">Gunbi</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link letter" href="#">Bienvenido</a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle letter" data-toggle="dropdown"
+             href="#" role="button" aria-haspopup="true" aria-expanded="false">
+             Masivos
+          </a>
+          <div class="dropdown-menu letter">
+            <a class="dropdown-item" routerLink="/Payments/Masive" *ngIf="roles.includes('Coordinador') && permissions.includes('Payments.Upload')">Pagos</a>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle letter" data-toggle="dropdown"
+             href="#" role="button" aria-haspopup="true" aria-expanded="false">
+             Configuracion
+          </a>
+          <div class="dropdown-menu letter">
+            <a class="dropdown-item" routerLink="/Users" *ngIf="roles.includes('Administrador') || roles.includes('Coordinador') && permissions.includes('Users.Index')">Usuarios</a>
+            <a class="dropdown-item" routerLink="/AssigUserCampaign" *ngIf="roles.includes('Administrador') && permissions.includes('AssigUserConfiguration.Index')">Agregar usuario configuracion</a>
+            <a class="dropdown-item" routerLink="/Users/Inactives" *ngIf="roles.includes('Administrador') && permissions.includes('Users.Inactives')">Usuarios Inactivos</a>
+            <a class="dropdown-item" routerLink="/Campaigns" *ngIf="roles.includes('Administrador') || roles.includes('Coordinador') && permissions.includes('Campaigns.Index')">Campaña</a>
+            <a class="dropdown-item" routerLink="/Cycles" *ngIf="roles.includes('Administrador') || roles.includes('Coordinador') && permissions.includes('Cycles.Index')">Ciclo</a>
+            <a class="dropdown-item" routerLink="/Roles" *ngIf="roles.includes('Administrador') && permissions.includes('RolesAndPermissions.Index')">Roles</a>
+            <a class="dropdown-item" routerLink="/Focus" *ngIf="roles.includes('Administrador') || roles.includes('Coordinador') && permissions.includes('Focus.Index')">Foco</a>
+          <!--   <a class="dropdown-item" routerLink="/Payments" *ngIf="roles.includes('Coordinador') && permissions.includes('Payments.Index')">Pagos</a> -->
+            <a class="dropdown-item" routerLink="/ConfigurationCampaigns" *ngIf="roles.includes('Administrador') || roles.includes('Coordinador') && permissions.includes('ConfigurationCampaigns.Index')">Confiuracion Campaña</a>
+          </div>
+        </li>
+      </ul>
+
+
+    </div>
+
+    <a (click)="Logout()" class="navbar-brand letter"> Logout </a>
+</nav>
+
+
+
